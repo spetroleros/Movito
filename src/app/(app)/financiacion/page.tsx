@@ -44,7 +44,7 @@ export default function FinanciacionPage() {
       supabase.from('ventas').select('id, numero, total, cliente_id').eq('tipo', 'venta').order('fecha', { ascending: false }),
     ])
     setPlanes(pl.data ?? [])
-    setClientes(cl.data ?? [])
+    setClientes((cl.data ?? []) as any)
     setVentas(vt.data ?? [])
     setLoading(false)
   }
