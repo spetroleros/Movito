@@ -61,7 +61,8 @@ export default function DashboardPage() {
     p.filter(pd => pd.stock_actual < pd.stock_minimo).forEach(pd => al.push(`Stock bajo: ${pd.nombre} (${pd.stock_actual} uds., mínimo ${pd.stock_minimo})`))
     imp.filter(i => i.estado === 'demorada').forEach(i => al.push(`Importación ${i.numero} demorada — revisar en aduana`))
     c.filter(ct => ct.estado === 'mora').forEach(() => al.push('Plan de financiación en mora — revisar cuotas vencidas'))
-    setAlertas([...new Set(al)].slice(0, 6))
+    const unique = al.filter((item, index) => al.indexOf(item) === index)
+setAlertas(unique.slice(0, 6))setAlertas([...new Set(al)].slice(0, 6))
 
     // Gráfico — últimos 6 meses
     const meses: any[] = []
