@@ -49,10 +49,10 @@ export default function LogisticaPage() {
       supabase.from('ventas').select('id, numero, cliente_id').eq('tipo', 'venta').order('fecha', { ascending: false }),
       supabase.from('usuarios').select('id, nombre').eq('activo', true),
     ])
-    setEntregas(e.data ?? [])
-    setClientes(c.data ?? [])
-    setVentasList(v.data ?? [])
-    setUsuarios(u.data ?? [])
+    setEntregas((e.data ?? []) as any)
+setClientes((c.data ?? []) as any)
+setVentasList((v.data ?? []) as any)
+setUsuarios((u.data ?? []) as any)
     setLoading(false)
   }
 
