@@ -20,7 +20,7 @@ const navItems = [
   { label: 'Inventario', href: '/inventario', section: 'Operaciones' },
   { label: 'Ventas', href: '/ventas', section: 'Operaciones' },
   { label: 'Logística', href: '/logistica', section: 'Operaciones' },
-  { label: 'Clientes', href: '/clientes', section: 'Clientes' },
+  { label: 'Caja', href: '/caja', section: 'Clientes' },{ label: 'Clientes', href: '/clientes', section: 'Clientes' },
   { label: 'Financiación', href: '/financiacion', section: 'Clientes' },
   { label: 'Reportes', href: '/reportes', section: 'Análisis' },
 ]
