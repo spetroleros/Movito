@@ -44,9 +44,9 @@ export default function ImportacionesPage() {
       supabase.from('proveedores').select('*').eq('activo', true).order('nombre'),
       supabase.from('productos').select('id, nombre, codigo').eq('activo', true).order('nombre'),
     ])
-    setImportaciones(im.data ?? [])
-    setProveedores(pr.data ?? [])
-    setProductos(pd.data ?? [])
+setImportaciones((im.data ?? []) as any)
+setProveedores((pr.data ?? []) as any)
+setProductos((pd.data ?? []) as any)
     setLoading(false)
   }
 
