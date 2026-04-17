@@ -27,7 +27,7 @@ const navItems = [
 
 export default function Sidebar() {
   const pathname = usePathname()
-  const sections = [...new Set(navItems.map(i => i.section))]
+  const sections = navItems.map(i => i.section).filter((s, i, arr) => arr.indexOf(s) === i)
 
   return (
     <aside className="w-52 min-h-screen bg-white border-r border-gray-100 flex flex-col py-3.5 shrink-0">
