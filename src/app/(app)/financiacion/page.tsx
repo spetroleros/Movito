@@ -45,7 +45,7 @@ export default function FinanciacionPage() {
     ])
     setPlanes(pl.data ?? [])
     setClientes((cl.data ?? []) as any)
-    setVentas(vt.data ?? [])
+    setVentas((vt.data ?? []) as any)
     setLoading(false)
   }
 
