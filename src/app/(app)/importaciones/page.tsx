@@ -58,18 +58,29 @@ setProductos((pd.data ?? []) as any)
     return mq && me
   })
 
-  async function guardarImportacion(e: React.FormEvent) {
-    e.preventDefault()
+  async function guardarImportacion(ev: React.FormEvent) {
+    ev.preventDefault()
     setSaving(true)
-    const { data: imp, error } = await supabase.from('importaciones').insert({
-      ...form,
+    const payload: any = {
+      proveedor_id: form.proveedor_id,
+      tipo_carga: form.tipo_carga || null,
+      numero_tracking: form.numero_tracking || null,
+      despachante: form.despachante || null,
+      fecha_orden: form.fecha_orden,
+      eta: form.eta || null,
       costo_fob_usd: Number(form.costo_fob_usd) || 0,
       costo_flete_usd: Number(form.costo_flete_usd) || 0,
       costo_seguro_usd: Number(form.costo_seguro_usd) || 0,
       gastos_locales_ars: Number(form.gastos_locales_ars) || 0,
       estado: 'pendiente',
-    }).select().single()
-
+      notas: form.notas || null,
+    }
+    const { data: imp, error } = await supabase
+      .from('importaciones')
+      .insert(payload)
+      .select()
+      .single()
+    console.log('Importacion guardada:', imp, 'Error:', error)
     if (!error && imp) {
       const itemsData = items.filter(i => i.producto_id).map(i => ({
         importacion_id: imp.id,
@@ -79,7 +90,6 @@ setProductos((pd.data ?? []) as any)
       }))
       if (itemsData.length) await supabase.from('items_importacion').insert(itemsData)
     }
-
     setSaving(false)
     setForm(emptyForm)
     setItems([{ producto_id: '', cantidad: 1, precio_unit_usd: '' }])
