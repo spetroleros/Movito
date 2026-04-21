@@ -353,16 +353,27 @@ setProductos((pd.data ?? []) as any)
             </div>
             <div className="space-y-3">
               <div className="card p-4">
-                <p className="text-xs font-medium text-gray-700 mb-3">Actualizar estado</p>
-                <div className="space-y-2">
-                  {Object.entries(estadoLabel).map(([k, v]) => (
-                    <button key={k} className={`btn w-full btn-sm ${selected.estado === k ? 'bg-blue-50 text-blue-700 border-blue-200' : ''}`}
-                      onClick={() => cambiarEstado(selected.id, k)}>
-                      {v}
-                    </button>
-                  ))}
-                </div>
-              </div>
+    <p className="text-xs font-medium text-gray-700 mb-3">Actualizar estado</p>
+    <div className="space-y-2">
+      {Object.entries(estadoLabel).map(([k, v]) => (
+        <button key={k} className={`btn w-full btn-sm ${selected.estado === k ? 'bg-blue-50 text-blue-700 border-blue-200' : ''}`}
+          onClick={() => cambiarEstado(selected.id, k)}>
+          {v}
+        </button>
+      ))}
+    </div>
+  </div>
+  <button
+    className="btn w-full btn-sm text-red-600 border-red-200 hover:bg-red-50"
+    onClick={async () => {
+      if (!confirm('¿Eliminar esta orden? Esta acción no se puede deshacer.')) return
+      await supabase.from('items_importacion').delete().eq('importacion_id', selected.id)
+      await supabase.from('importaciones').delete().eq('id', selected.id)
+      setView('list')
+      fetchAll()
+    }}>
+    Eliminar orden
+  </button>
             </div>
           </div>
         </div>
