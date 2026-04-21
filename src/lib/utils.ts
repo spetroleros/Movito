@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function formatPeso(value: number): string {
-  return '$' + Math.round(value).toLocaleString('es-AR')
+  return 'USD ' + value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 }
 
 export function formatFecha(dateStr: string): string {
